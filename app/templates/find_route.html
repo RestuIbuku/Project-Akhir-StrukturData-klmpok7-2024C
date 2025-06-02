@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+   
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h3 class="card-title mb-0">
+                        <i class="fas fa-route me-2"></i>Rute Pengiriman Optimal
+                    </h3>
+                    <p class="card-text mt-2">Menggunakan Algoritma Dijkstra untuk menentukan rute terpendek</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card border-primary h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-building me-2"></i>Kantor Pengiriman</h5>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">Kantor Unesa Express</h6>
+                    <p class="card-text">Jalan Maospati-barat no 1</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Statistics -->
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card bg-info text-white h-100">
+                        <div class="card-body text-center">
+                            <h3 class="card-title">{{ packages|length }}</h3>
+                            <p class="card-text">Total Paket</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card bg-success text-white h-100">
+                        <div class="card-body text-center">
+                            <h3 class="card-title">{{ total_distance|round(1) }} km</h3>
+                            <p class="card-text">Total Jarak</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card bg-warning text-white h-100">
+                        <div class="card-body text-center">
+                            <h3 class="card-title">{{ estimated_time }}</h3>
+                            <p class="card-text">Estimasi Waktu</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header ">
+                    <h5 class="mb-0"><i class="fas fa-list-ol me-2"></i>Urutan Pengiriman</h5>
+                </div>
+                <div class="card-body">
+                    <div class="timeline">
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-marker bg-primary">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <h5 class="timeline-title">Kantor Unesa Ekspress</h5>
+                                <p>Titik Awal - Jalan Maospati-barat no 1</p>
+                            </div>
+                        </div>
+
+                        <!-- Delivery Points -->
+                        {% for package in packages %}
+                        <div class="timeline-item">
+                            <div class="timeline-marker {% if package.status == 'delivered' %}bg-success{% else %}bg-warning{% endif %}">
+                                <span class="marker-label">{{ loop.index }}</span>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="timeline-title">{{ package.receiver_name }}</h5>
+                                        <p class="mb-1">{{ package.receiver_address }}</p>
+                                        <small class="text-muted">
+                                            <i class="fas fa-route me-1"></i>{{ package.distance|round(1) }} km dari titik sebelumnya
+                                        </small>
+                                    </div>
+                                    <form action="{{ url_for('mark_delivered', tracking_number=package.tracking_number) }}" method="POST" style="display: inline;">
+                                        <button type="submit" class="btn btn-success btn-sm">
+                                            <i class="fas fa-check me-1"></i>Tandai Terkirim
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+
+ 
+    
+.card {
+    background: #7DA0c4;
+    backdrop-filter: blur(10px);
+    border: none;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    transition: all 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+}
+
+
+.timeline {
+    position: relative;
+    padding: 20px 0;
+}
+
+.timeline-item {
+    position: relative;
+    padding: 20px 0;
+    padding-left: 40px;
+    border-left: 2px solid #e9ecef;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -11px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    color: white;
+    font-size: 12px;
+}
+
+.timeline-marker i {
+    line-height: 20px;
+}
+
+.marker-label {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.timeline-content {
+    padding: 0 20px;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 15px;
+}
+
+.timeline-title {
+    margin: 0;
+    font-size: 1.1rem;
+}
+</style>
+{% endblock %}

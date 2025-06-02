@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto text-center">
+            <h2 class="teks display-4 mb-4">Kurir App</h2>
+            <p class="teks lead mb-4">
+                Aplikasi inovatif untuk mengoptimalkan pengiriman paket menggunakan algoritma Dijkstra.
+                Membantu kurir menemukan rute terpendek dan efisien dalam pengiriman paket.
+            </p>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="fas fa-route fa-2x text-primary mb-3"></i>
+                            <h5>Rute Optimal</h5>
+                            <p class="text-muted">Menggunakan algoritma Dijkstra untuk menemukan rute terpendek</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="fas fa-history fa-2x text-primary mb-3"></i>
+                            <h5>Tracking Real-time</h5>
+                            <p class="text-muted">Pantau status pengiriman secara real-time</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="fas fa-chart-line fa-2x text-primary mb-3"></i>
+                            <h5>Analisis Kinerja</h5>
+                            <p class="text-muted">Laporan detail pengiriman dan statistik</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h2 class="teks mb-4">Tim Pengembang</h2>
+            <p class="teks lead  mb-5">Mahasiswa Teknik Informatika kampus unesa 5 Magetan </p>
+        </div>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+        {% for dev in developers %}
+        <div class="col-lg-4 col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                    <div class="mb-4">
+                        <img src="{{ url_for('static', filename='image/' + dev.image) }}" 
+                             alt="{{ dev.name }}" 
+                             class="rounded-circle img-thumbnail"
+                             style="width: 150px; height: 150px; object-fit: cover;">
+                    </div>
+                    <h5 class="card-title mb-1">{{ dev.name }}</h5>
+                    <p class="text-muted mb-3">{{ dev.nim }}</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/{{ dev.instagram }}" 
+                           class="btn btn-light btn-sm mx-1" 
+                           target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://github.com/{{ dev.github }}" 
+                           class="btn btn-light btn-sm mx-1" 
+                           target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    
+    <div class="row mt-5">
+        <div class="col-12 text-center">
+            <h3 class="teks">Hubungi Kami</h3>
+            <p class="teks">Ada pertanyaan atau saran? Jangan ragu untuk menghubungi kami</p>
+            <div class="mt-4">
+                <a href="mailto:contact@kurirapp.com" class="btn btn-outline-light me-2">
+                    <i class="fas fa-envelope me-2"></i>Email
+                </a>
+                <a href="https://github.com/your-repo" class="btn btn-outline-light">
+                    <i class="fab fa-github me-2"></i>GitHub Repository
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+
+.card {
+    background: #7DA0c4;
+    backdrop-filter: blur(10px);
+    border: none;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    transition: all 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+}
+
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.social-links a {
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.img-thumbnail {
+    border: 3px solid #007bff;
+    padding: 3px;
+}
+
+.teks{
+    color :#e5edf4;
+}
+</style>
+{% endblock %}

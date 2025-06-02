@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row fade-in">
+    <div class="col-md-12 text-center mb-5">
+        <h1 class="welcome-title display-4">Selamat Datang di Kurir App</h1>
+        <p class="teks lead">Sistem Pengiriman Paket dengan Rute Terpendek</p>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="logo-home fas fa-box fa-3x mb-3 "></i>
+                <h5 class="teks2 card-title">Tambah Paket</h5>
+                <p class="teks2 card-text">Tambahkan paket baru dengan mudah menggunakan peta interaktif</p>
+                <a href="{{ url_for('add_package') }}" class="btn btn-primary">Tambah Paket</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="logo-home fas fa-route fa-3x mb-3 "></i>
+                <h5 class="teks2 card-title">Cari Rute</h5>
+                <p class="teks2 card-text">Temukan rute terpendek untuk pengiriman paket Anda</p>
+                <a href="{{ url_for('find_route') }}" class="btn btn-primary">Cari Rute</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="logo-home fas fa-history fa-3x mb-3 "></i>
+                <h5 class="teks2 card-title">Riwayat Pengiriman</h5>
+                <p class="teks2 card-text">Lihat riwayat dan statistik pengiriman paket</p>
+                <a href="{{ url_for('history') }}" class="btn btn-primary">Lihat Riwayat</a>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+
+     
+   
+.card {
+    background: #7DA0c4;
+    backdrop-filter: blur(10px);
+    border: none;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    transition: all 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+}
+
+
+.welcome-title {
+    font-weight: bold;
+    color: #e5edf4;
+}
+.logo-home {
+    color: #ccd0cf;
+}
+
+.card{
+    background :#7DA0c4;
+}
+
+.teks{
+    color :#e5edf4;
+}
+
+.teks2{
+    color : #0f0f10
+}
+</style>
+{% endblock %}
